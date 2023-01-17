@@ -13,6 +13,10 @@ class Tarta extends Dulce{
         $this->maxNunComensales = $maxNunComensales;
    }
 
+   public function getRellenos()
+    {
+        return $this->rellenos;
+    }
     public function getNumPisos()
     {
         return $this->numPisos;
@@ -63,6 +67,7 @@ class Tarta extends Dulce{
             Número de comensales: '.$this->muestraComensalesPosibles().'<br>';
      }
 
+    
 }
 
 ?>
