@@ -8,7 +8,6 @@ class Bollo extends Dulce{
 
         parent::__construct($nombre, $numero, $precio);
 
-        $this->relleno = $relleno;
    }
    public function getRelleno()
    {

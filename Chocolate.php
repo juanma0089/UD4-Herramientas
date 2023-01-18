@@ -3,12 +3,10 @@
 include_once('Dulces.php');
 
 class Chocolate extends Dulce{
-    function __construct($nombre,$numero , $precio, private $porcentajeCacao, private $peso ){
+    function __construct($nombre, $numero , $precio, private $porcentajeCacao, private $peso ){
  
          parent::__construct($nombre, $numero, $precio);
- 
-         $this->porcentajeCacao = $porcentajeCacao;
-         $this->peso = $peso;
+
     }
    
     public function getPorcentajeCacao()

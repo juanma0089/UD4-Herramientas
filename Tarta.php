@@ -3,14 +3,11 @@ include_once('Dulces.php');
 
 class Tarta extends Dulce{
 
-    function __construct($nombre,$numero , $precio, private $rellenos = [], private $numPisos, private $minNumComensales = 2, private $maxNunComensales ){
+    function __construct($nombre, $numero , $precio, private $rellenos = [], private $numPisos, private $minNumComensales = 2, private $maxNunComensales ){
  
         parent::__construct($nombre, $numero, $precio);
 
-        $this->rellenos = $rellenos;
-        $this->numPisos = $numPisos;
-        $this->minNumComensales = $minNumComensales;
-        $this->maxNunComensales = $maxNunComensales;
+
    }
 
    public function getRellenos()

@@ -2,13 +2,12 @@
 include_once('Dulces.php');
 
 class Cliente{
-    function __construct(public $nombre, private $numero, private $dulcesComprados = [], private $numDulcesComprados, private $numPedidosEfectuados )
+
+    private $dulcesComprados = [];
+
+    function __construct(public $nombre, private $numero ,private $numPedidosEfectuados = 0 )
     {
-        $this->nombre = $nombre;
-        $this->numero = $numero;
-        $this->dulcesComprados = $dulcesComprados;
-        $this->numDulcesComprados = $numDulcesComprados;
-        $this->numPedidosEfectuados = $numPedidosEfectuados;
+        
     
     }
     public function getNumero()
@@ -21,19 +20,24 @@ class Cliente{
         return $this->dulcesComprados;
     }
    
-    public function getNumDulcesComprados()
-    {
-        return $this->numDulcesComprados;
-    }
-
     public function getNumPedidosEfectuados()
     {
         return $this->numPedidosEfectuados;
     }
 
     public function comprar(Dulce $dulce): bool {
-
-        return false;
+        //miramos si el dulce está dentro del array
+        if (in_array($dulce, $this->dulcesComprados)) {
+            foreach ($this->dulcesComprados as $key => $count) {
+                if ($key == $dulce) {
+                    
+                }else {
+                    $this->dulcesComprados[$key] = $dulce;
+                    $count+= $this->numPedidosEfectuados;
+                }
+            }
+        }
+        return true;
     }
 
     public function valorar(Dulce $dulce, string $comentario){
@@ -47,6 +51,15 @@ class Cliente{
 
     public function listarPedidos(): void{
 
+    }
+
+    public function muestraResumen()
+    {
+
+        $string = "</br><strong>" . $this->nombre . 
+        "</strong><br> Número: " . $this->numero . "<br>";
+
+           return  $string;
     }
 
 }
