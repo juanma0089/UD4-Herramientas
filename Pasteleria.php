@@ -1,5 +1,11 @@
 <?php
-
+include_once ('Chocolate.php');
+include_once ('Bollo.php');
+include_once ('Tarta.php');
+include_once ('Cliente.php');
+include_once ('./util/ClienteNoEncontradoException.php');
+include_once ('./util/DulceNoEncontradoException.php');
+include_once ('./util/DulceNoCompradoException.php');
 
 class Pasteleria{
     private $productos = [];
@@ -10,7 +16,6 @@ class Pasteleria{
     {
    
     }
-
 
     private function incluirProducto(Dulce $dulce){
         // al crear un producto lo incluimos en el array de productos
@@ -69,25 +74,41 @@ class Pasteleria{
     }
 
     public function comprarClienteProducto($numCliente, $numProductos ){
-        //comoprobamos si el cliente existe
-        foreach ($this->clientes as $cliente) {
-            if ($cliente->getNumero() == $numCliente) {
-                foreach ($this->productos as $producto) {
-                    if ($producto->getNumero() == $numProductos) {
-                        if ($cliente->comprar($producto)) {
-                            echo "<br>Ha comprado " . $producto->nombre . "<br>";
-                        } else {
-                            echo "<br>No se ha podido realizar la compra de " . $producto->nombre . "<br>";
+
+        try {
+            //creo dos variables para guardar en ellas tanto cliente como producto y asi comprobar luego si hay algo guardado o no
+            $clienteCreado = "";
+            $productoCreado = "";
+
+            foreach ($this->clientes as $cliente) {
+                if ($cliente->getNumero() == $numCliente) {
+                    $clienteCreado = $cliente;
+                    try {
+                        foreach ($this->productos as $producto) {
+                            if ($producto->getNumero() == $numProductos) {
+                                $productoCreado = $producto;
+                                $cliente->comprar($producto);
+                                echo "<br>Ha comprado " . $producto->nombre . "<br>";
+                                return $this;
+                            }
                         }
-                        return $this;
+                    } catch (DulceNoCompradoException $e) {
+                        echo $e->getMensaje();
                     }
                 }
-                echo "<br>El producto que intenta comprar no existe<br>";
-                return $this;
             }
 
-
+            if ($clienteCreado === "") {
+                throw new ClienteNoEncontradoException("No se ha encontrado al cliente con ese id<br>");
+            } else if ($productoCreado === "") {
+                throw new DulceNoEncontradoException("No se ha encontrado ningún dulce con ese id<br>");
+            }
+        } catch (ClienteNoEncontradoException $e) {
+            echo $e->getMensaje();
+        } catch (DulceNoEncontradoException $e) {
+            echo $e->getMensaje();
         }
+        return $this;
     }
     public function getNombre()
     {

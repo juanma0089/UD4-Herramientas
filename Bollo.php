@@ -1,8 +1,6 @@
 <?php
 include_once('Dulces.php');
 
-
-
 class Bollo extends Dulce{
    function __construct($nombre,$numero , $precio, private $relleno ){
 

@@ -1,5 +1,6 @@
 <?php
 include_once('Dulces.php');
+include_once ('./util/DulceNoCompradoException.php');
 
 class Cliente{
 
@@ -30,12 +31,25 @@ class Cliente{
        array_push($this->dulcesComprados, $dulce);
         $this->numPedidosEfectuados++;
 
-        return in_array($dulce, $this->dulcesComprados);
+        if (in_array($dulce, $this->dulcesComprados)) {
+            return true;
+        } else {
+            throw new DulceNoCompradoException("No se ha podido completar la compra");
+        }
     }
 
     public function valorar(Dulce $dulce, string $comentario){
 
-        echo ($this->listaDeDulces($dulce)) ? "Se ha valorado el producto" : "No has comprado el dulce a valorar";
+      try {
+            if ($this->listaDeDulces($dulce)) {
+                echo "Se ha valorado con éxito";
+            } else {
+                throw new DulceNoCompradoException("No has comprado el dulce a valorar");
+            }
+        } catch (DulceNoCompradoException $e) {
+            echo $e->getMensaje();
+        }
+
     }
 
     public function listaDeDulces(Dulce $dulce): bool{
