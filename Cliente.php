@@ -26,38 +26,39 @@ class Cliente{
     }
 
     public function comprar(Dulce $dulce): bool {
-        //miramos si el dulce está dentro del array
-        if (in_array($dulce, $this->dulcesComprados)) {
-            foreach ($this->dulcesComprados as $key => $count) {
-                if ($key == $dulce) {
-                    
-                }else {
-                    $this->dulcesComprados[$key] = $dulce;
-                    $count+= $this->numPedidosEfectuados;
-                }
-            }
-        }
-        return true;
+
+       array_push($this->dulcesComprados, $dulce);
+        $this->numPedidosEfectuados++;
+
+        return in_array($dulce, $this->dulcesComprados);
     }
 
     public function valorar(Dulce $dulce, string $comentario){
 
+        echo ($this->listaDeDulces($dulce)) ? "Se ha valorado el producto" : "No has comprado el dulce a valorar";
     }
 
     public function listaDeDulces(Dulce $dulce): bool{
 
-        return false;
+        return in_array($dulce, $this->dulcesComprados);
     }
 
-    public function listarPedidos(): void{
+    public function listarPedidos(): string{
 
+        //* Función de void a String para llamarla desde muestraResumen.
+        $string = "Llevas ".$this->numPedidosEfectuados." pedidos:";
+        foreach ($this->dulcesComprados as $dulce) {
+            $string .= "<br>- ".$dulce->nombre;
+        }
+        return $string;
     }
 
     public function muestraResumen()
     {
 
         $string = "</br><strong>" . $this->nombre . 
-        "</strong><br> Número: " . $this->numero . "<br>";
+        "</strong><br> Número: " . $this->numero . "<br>".
+        $this->listarPedidos();
 
            return  $string;
     }

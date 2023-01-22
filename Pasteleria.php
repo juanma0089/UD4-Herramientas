@@ -72,7 +72,18 @@ class Pasteleria{
         //comoprobamos si el cliente existe
         foreach ($this->clientes as $cliente) {
             if ($cliente->getNumero() == $numCliente) {
-
+                foreach ($this->productos as $producto) {
+                    if ($producto->getNumero() == $numProductos) {
+                        if ($cliente->comprar($producto)) {
+                            echo "<br>Ha comprado " . $producto->nombre . "<br>";
+                        } else {
+                            echo "<br>No se ha podido realizar la compra de " . $producto->nombre . "<br>";
+                        }
+                        return $this;
+                    }
+                }
+                echo "<br>El producto que intenta comprar no existe<br>";
+                return $this;
             }
 
 
