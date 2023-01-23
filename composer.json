@@ -1,0 +1,25 @@
+{
+    "name": "src/log",
+    "description": "Pruebas monolog",
+    "require": {
+        "monolog/monolog": "^2.8"
+    },
+    "license": "CC",
+    "autoload": {
+        "psr-4": {
+            "Src\\Log\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "juanma0089",
+            "email": "juanma0089@hotmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+        "test": "phpunit --testdox --colors test"
+    }
+}

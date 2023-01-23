@@ -1,4 +1,8 @@
 <?php
+
+use Monolog\Logger;
+use util\LogFactory;
+
 include_once ('Chocolate.php');
 include_once ('Bollo.php');
 include_once ('Tarta.php');
@@ -6,15 +10,19 @@ include_once ('Cliente.php');
 include_once ('./util/ClienteNoEncontradoException.php');
 include_once ('./util/DulceNoEncontradoException.php');
 include_once ('./util/DulceNoCompradoException.php');
+include_once('./util/logFactory.php');
+
 
 class Pasteleria{
     private $productos = [];
     private $numProductos = 0; 
     private $clientes = [];
     private $numClientes = 0;
+
+    private Logger $log;
     function __construct(private $nombre)
     {
-   
+        $this->log = LogFactory::getLogger();
     }
 
     private function incluirProducto(Dulce $dulce){
@@ -99,6 +107,7 @@ class Pasteleria{
             }
 
             if ($clienteCreado === "") {
+                $this->log->warning("Cliente no encontrado",[$numCliente]);
                 throw new ClienteNoEncontradoException("No se ha encontrado al cliente con ese id<br>");
             } else if ($productoCreado === "") {
                 throw new DulceNoEncontradoException("No se ha encontrado ningún dulce con ese id<br>");

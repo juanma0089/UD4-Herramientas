@@ -4,6 +4,7 @@ include_once('Chocolate.php');
 include_once ('Cliente.php');
 include_once ('Pasteleria.php');
 include_once('Tarta.php');
+include __DIR__ . "/vendor/autoload.php";
 
 $pasteleria = new Pasteleria("CalvinMuffin");
 
@@ -15,7 +16,10 @@ $pasteleria->incluirTarta("RedVelvet", 13.10, $rellenos,3, 3, 4);
 echo ($pasteleria->listarProductos());
 echo ($pasteleria->listarClientes());
 $pasteleria->comprarClienteProducto(0, 0);
-$pasteleria->comprarClienteProducto(0, 2);
+
 
 echo $pasteleria->incluirCliente('Juanma');
 $pasteleria->comprarClienteProducto(1, 2);
+
+
+$pasteleria->comprarClienteProducto(3, 2);
