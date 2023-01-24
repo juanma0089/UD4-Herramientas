@@ -1,2 +1,5 @@
-[2023-01-23T12:18:14.153079+01:00] miApp.WARNING: Cliente no encontrado [] []
-[2023-01-23T12:19:29.211127+01:00] miApp.WARNING: Cliente no encontrado [3] []
+[2023-01-24T10:53:38.926579+01:00] miApp.NOTICE: CLiente creado con el nombre: ["Maria"] []
+[2023-01-24T10:53:38.929060+01:00] miApp.INFO: Producto comprado ["Choco Colombiano"] []
+[2023-01-24T10:53:38.929109+01:00] miApp.NOTICE: CLiente creado con el nombre: ["Juanma"] []
+[2023-01-24T10:53:38.929139+01:00] miApp.INFO: Producto comprado ["RedVelvet"] []
+[2023-01-24T10:53:38.929164+01:00] miApp.WARNING: Cliente no encontrado [3] []

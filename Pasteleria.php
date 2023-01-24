@@ -59,6 +59,7 @@ class Pasteleria{
 
         array_push($this->clientes, $cliente);
 
+        $this->log->notice("CLiente creado con el nombre:",[$cliente->nombre]);
         echo "<br> Se ha creado un nuevo Cliente<br>
         Nombre: " . $nombre . " con el número de cliente " . $this->numClientes . "<br>";
         $this->numClientes++;
@@ -97,6 +98,7 @@ class Pasteleria{
                                 $productoCreado = $producto;
                                 $cliente->comprar($producto);
                                 echo "<br>Ha comprado " . $producto->nombre . "<br>";
+                                $this->log->info("Producto comprado",[$producto->nombre]);
                                 return $this;
                             }
                         }
